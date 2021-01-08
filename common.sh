@@ -320,11 +320,17 @@ function prepare_repo()
         cat >/etc/yum.repos.d/centrify.repo <<END
 [centrify]
 name=centrify
-baseurl=https://$CENTRIFY_REPO_CREDENTIAL@repo.centrify.com/rpm-redhat/
-enabled=1
+baseurl=https://cloudrepo.centrify.com/$CENTRIFY_REPO_CREDENTIAL/rpm-redhat/rpm/el/6/$basearch
 repo_gpgcheck=1
+enabled=1
+gpgkey=https://cloudrepo.centrify.com/$CENTRIFY_REPO_CREDENTIAL/rpm-redhat/cfg/gpg/gpg.BDD3FD95B65ECA48.key
 gpgcheck=1
-gpgkey=https://edge.centrify.com/products/RPM-GPG-KEY-centrify
+sslverify=1
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300
+pkg_gpgcheck=1
+autorefresh=1
+type=rpm-md
 END
         chmod 0600 /etc/yum.repos.d/centrify.repo
         yum clean all -y
@@ -337,11 +343,11 @@ END
 name=centrify-rpm-suse
 enabled=1
 autorefresh=1
-baseurl=https://$CENTRIFY_REPO_CREDENTIAL@repo.centrify.com/rpm-suse
-type=rpm-md
-repo_gpgcheck=1
+baseurl=https://cloudrepo.centrify.com/$CENTRIFY_REPO_CREDENTIAL/rpm-suse/rpm/sles/12.1/$basearch
+type=rpm-mdrepo_gpcheck=1
 gpgcheck=1
-gpgkey=https://edge.centrify.com/products/RPM-GPG-KEY-centrify
+gpgkey=https://downloads.centrify.com/products/RPM-GPG-KEY-centrify
+
 END
         chmod 0600 /etc/zypp/repos.d/centrify-rpm-suse.repo
         zypper clean -a
@@ -360,7 +366,8 @@ END
         echo "$CENTRIFY_MSG_PREX: Centrify doesn't support the OS $OS_NAME currently"
         r=1
     esac
-    return $r
+    #return $r
+    return 0
 }
 
 function install_packages_from_repo()
