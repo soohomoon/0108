@@ -318,8 +318,8 @@ function prepare_repo()
     case "$OS_NAME" in
     rhel|amzn|centos)
         cat >/etc/yum.repos.d/centrify.repo <<END
-[centrify]
-name=centrify
+[centrify-rpm-redhat]
+name=centrify-rpm-redhat
 baseurl=https://cloudrepo.centrify.com/$CENTRIFY_REPO_CREDENTIAL/rpm-redhat/rpm/el/6/$basearch
 repo_gpgcheck=1
 enabled=1
