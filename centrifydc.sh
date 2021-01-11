@@ -514,8 +514,8 @@ function install_leave_join_service ()
 
 function start_deploy()
 {
-    prepare_repo
-    r=$? && [ $r -ne 0 ] && return $r
+    #prepare_repo
+    #r=$? && [ $r -ne 0 ] && return $r
   
     #install_packages
     #r=$? && [ $r -ne 0 ] && return $r
