@@ -198,7 +198,7 @@ function vault_accounts()
         echo "for role in \${roles[@]} " >> $VAULT_SCRIPT
         echo "  do " >> $VAULT_SCRIPT
         #echo "     Permissions=(\"\${Permissions[@]}\" \"-p\" \"\\\"role:\$role:Edit,Checkout,View,Login\\\"\" )" >> $VAULT_SCRIPT
-        echo "     Permissions=(\"\${Permissions[@]}\" \"-p\" \"\\\"role:\$role:View,Login\\\"\" )" >> $VAULT_SCRIPT
+        echo "     Permissions=(\"\${Permissions[@]}\" \"-p\" \"\\\"role:\$role:View,Login,Checkout\\\"\" )" >> $VAULT_SCRIPT
         echo "done" >> $VAULT_SCRIPT
         echo "IFS=\",\"" >> $VAULT_SCRIPT
         echo "sleep 10" >> $VAULT_SCRIPT
