@@ -203,7 +203,8 @@ function vault_accounts()
         echo "IFS=\",\"" >> $VAULT_SCRIPT
         echo "sleep 10" >> $VAULT_SCRIPT
         echo "for account in \$VAULTED_ACCOUNTS; do" >> $VAULT_SCRIPT
-        echo "   export PASS=\`openssl rand -base64 10\`" >> $VAULT_SCRIPT
+        #echo "   export PASS=\`openssl rand -base64 10\`" >> $VAULT_SCRIPT
+	echo "   export PASS=\`openssl rand -base64 20\`" >> $VAULT_SCRIPT
         echo "   if id -u \$account > /dev/null 2>&1; then" >> $VAULT_SCRIPT
         echo "      echo \$PASS | passwd --stdin \$account" >> $VAULT_SCRIPT
         echo "   else" >> $VAULT_SCRIPT
