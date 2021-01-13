@@ -401,8 +401,8 @@ function start_deploy()
     resolve_rpm_name
     r=$? && [ $r -ne 0 ] && return $r
 
-    #download_install_rpm $CENTRIFYCC_DOWNLOAD_PREFIX $CENTRIFYCC_RPM_NAME
-    #r=$? && [ $r -ne 0 ] && return $r
+    download_install_rpm $CENTRIFYCC_DOWNLOAD_PREFIX $CENTRIFYCC_RPM_NAME
+    r=$? && [ $r -ne 0 ] && return $r
   
     disable_selinux
     r=$? && [ $r -ne 0 ] && return $r
