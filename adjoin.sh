@@ -111,8 +111,8 @@ function vault()
 
 private_ip=`curl --fail -s http://169.254.169.254/latest/meta-data/local-ipv4`
 host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
-
+vault
 /usr/sbin/adjoin $DOMAIN -z "$ZONE" --name "$host_name" -E /var/prestage_cache $ADDITIONAL_OPS
 
-vault
+
 #do_adedit
