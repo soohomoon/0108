@@ -420,7 +420,7 @@ function do_adjoin()
 
     private_ip=`curl --fail -s http://169.254.169.254/latest/meta-data/local-ipv4`
     host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
-        ;;
+    
 
     #result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name `hostname` $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
     result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name `host_name` $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
