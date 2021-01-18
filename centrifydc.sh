@@ -383,7 +383,7 @@ function generate_hostname()
         echo "$host_name" >/etc/hostname 
         ;;
     esac
-    myhostname $host_name
+    myhostname=$host_name
     #hostname $host_name
     # Fix the bug that sudo cmd always complains 'sudo: unable to resolve host' on ubuntu.
     # Actually it is AWS who shall fix the bug.
