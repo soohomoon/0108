@@ -571,6 +571,8 @@ function start_deploy()
       
       #do_adedit
       #r=$? && [ $r -ne 0 ] && return $r
+      
+      vault
 
       install_leave_join_service
     fi
