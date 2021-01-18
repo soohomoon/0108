@@ -30,7 +30,6 @@ function generate_hostname()
         echo "$CENTRIFY_MSG_PREX: invalid hostname format: $CENTRIFYDC_HOSTNAME_FORMAT" && return 1
         ;;
     esac
-
     if [ "$host_name" = "" ];then
         echo "$CENTRIFY_MSG_PREX: cannot set host_name, an internal error happened!" && return 1
     fi
@@ -39,7 +38,6 @@ function generate_hostname()
         # Only leave the start 15 chars.
     #    host_name=`echo $host_name | sed -n 's/^\(.\{15,15\}\).*$/\1/p'`
     #fi
-    
     echo "$host_name" | grep -E "[\._]" >/dev/null && host_name=`echo $host_name | sed -n 's/[\._]/-/gp'`
     # Setup hostname
     case "$OS_NAME" in
@@ -51,7 +49,7 @@ function generate_hostname()
         echo "$host_name" >/etc/hostname 
         ;;
     esac
-    hostname $host_name
+    #hostname $host_name
     # Fix the bug that sudo cmd always complains 'sudo: unable to resolve host' on ubuntu.
     # Actually it is AWS who shall fix the bug.
     [ "$OS_NAME" = "ubuntu" ] && echo "127.0.0.1 $host_name" >> /etc/hosts
