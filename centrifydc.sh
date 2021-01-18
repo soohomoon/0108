@@ -423,7 +423,7 @@ function do_adjoin()
     
 
     #result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name `hostname` $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
-    result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name `$host_name` $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
+    result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name "$host_name" $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
     r=$?
     [ $r -ne 0 ] && echo "$CENTRIFY_MSG_PREX: adjoin failed!!" && return $r
     if echo $result | grep 'The directory service is busy' >/dev/null 2>&1 ;then
@@ -434,7 +434,7 @@ function do_adjoin()
         /usr/sbin/adjoin $domain_name \
             -z $CENTRIFYDC_ZONE_NAME \
             #--name `hostname` \
-	    --name `$host_name` \
+	    --name '$host_name' \
             $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS
         r=$?
         [ $r -ne 0 ] && echo "$CENTRIFY_MSG_PREX: run adjoin failed again" && return 1
