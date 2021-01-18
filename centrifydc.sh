@@ -376,11 +376,11 @@ function generate_hostname()
     # Setup hostname
     case "$OS_NAME" in
     rhel|amzn|centos)
-        sed -i '/HOSTNAME=/d' /etc/sysconfig/network
-        echo "HOSTNAME=$host_name" > /etc/sysconfig/network
+        #sed -i '/HOSTNAME=/d' /etc/sysconfig/network
+        #echo "HOSTNAME=$host_name" > /etc/sysconfig/network
         ;;
     *)
-        echo "$host_name" >/etc/hostname 
+        #echo "$host_name" >/etc/hostname 
         ;;
     esac
     #hostname $host_name
