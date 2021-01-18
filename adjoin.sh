@@ -100,8 +100,6 @@ function vault()
 
 }
 
-private_ip=`curl --fail -s http://169.254.169.254/latest/meta-data/local-ipv4`
-host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
 
 # Comment this out since it doesn't make much sense to generate hostname during reboot
 #generate_hostname
@@ -110,6 +108,9 @@ host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
 
 # leave the system from the domain if joined
 /usr/sbin/adleave -r && sleep 3 || true
+
+private_ip=`curl --fail -s http://169.254.169.254/latest/meta-data/local-ipv4`
+host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
 
 /usr/sbin/adjoin $DOMAIN -z "$ZONE" --name '$host_name' -E /var/prestage_cache $ADDITIONAL_OPS
 
