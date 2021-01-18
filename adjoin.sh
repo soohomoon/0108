@@ -42,11 +42,11 @@ function generate_hostname()
     # Setup hostname
     case "$OS_NAME" in
     rhel|amzn|centos)
-        sed -i '/HOSTNAME=/d' /etc/sysconfig/network
-        echo "HOSTNAME=$host_name" > /etc/sysconfig/network
+     #   sed -i '/HOSTNAME=/d' /etc/sysconfig/network
+      #  echo "HOSTNAME=$host_name" > /etc/sysconfig/network
         ;;
     *)
-        echo "$host_name" >/etc/hostname 
+       # echo "$host_name" >/etc/hostname 
         ;;
     esac
     #hostname $host_name
@@ -67,6 +67,9 @@ function do_adedit()
     fi
 }
 
+private_ip=`curl --fail -s http://169.254.169.254/latest/meta-data/local-ipv4`
+host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
+
 # Comment this out since it doesn't make much sense to generate hostname during reboot
 #generate_hostname
 
@@ -75,6 +78,6 @@ function do_adedit()
 # leave the system from the domain if joined
 /usr/sbin/adleave -r && sleep 3 || true
 
-/usr/sbin/adjoin $DOMAIN -z "$ZONE" --name `hostname` -E /var/prestage_cache $ADDITIONAL_OPS
+/usr/sbin/adjoin $DOMAIN -z "$ZONE" --name '$host_name' -E /var/prestage_cache $ADDITIONAL_OPS
 
-do_adedit
+#do_adedit
