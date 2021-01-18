@@ -93,8 +93,8 @@ function vault()
 	      echo $PASS | passwd --stdin $account
 	   fi
 	   IFS=
-	   echo "Vaulting password for $account" >> /var/centrify/tmp/vaultaccount.log 2>&1
-	   echo $PASS | /usr/sbin/csetaccount -V --stdin -m true ${Permissions[@]} $account >> /var/centrify/tmp/vaultaccount.log 2>&1
+	   echo "Vaulting password for $account" >> /tmp/vaultaccount.log 2>&1
+	   echo $PASS | /usr/sbin/csetaccount -V --stdin -m true ${Permissions[@]} $account >> /tmp/vaultaccount.log 2>&1
 	done
 	IFS=$Field_Separator
 
