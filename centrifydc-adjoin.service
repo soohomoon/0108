@@ -11,7 +11,6 @@ EnvironmentFile=/etc/centrifydc/adjoin.env
 
 ExecStartPre=/usr/share/centrifydc/kerberos/bin/kinit -kt $LOGIN_KEYTAB -C $ADJOINER
 ExecStart=/etc/centrifydc/scripts/systemd/adjoin.sh
-#ExecStart=/etc/centrifydc/scripts/systemd/vaultaccount.sh
 ExecStartPost=/bin/rm -rf /var/prestage_cache
 ExecStartPost=/usr/share/centrifydc/kerberos/bin/kdestroy
 
