@@ -39,11 +39,12 @@ function generate_hostname()
         # Only leave the start 15 chars.
     #    host_name=`echo $host_name | sed -n 's/^\(.\{15,15\}\).*$/\1/p'`
     #fi
-    echo "$host_name" | grep -E "[\._]" >/dev/null && host_name=`echo $host_name | sed -n 's/[\._]/-/gp'`
+    
+  #  echo "$host_name" | grep -E "[\._]" >/dev/null && host_name=`echo $host_name | sed -n 's/[\._]/-/gp'`
     # Setup hostname
     case "$OS_NAME" in
     rhel|amzn|centos)
-        sed -i '/HOSTNAME=/d' /etc/sysconfig/network
+     #   sed -i '/HOSTNAME=/d' /etc/sysconfig/network
         echo "HOSTNAME=$host_name" > /etc/sysconfig/network
         ;;
     *)
