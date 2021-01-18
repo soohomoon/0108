@@ -533,7 +533,9 @@ function install_leave_join_service ()
     # adjoin.sh needs the common.sh
     cp -f $centrifydc_deploy_dir/common.sh /etc/centrifydc/scripts/common.sh
     cp -f $centrifydc_deploy_dir/adjoin.sh /etc/centrifydc/scripts/systemd/adjoin.sh
+    cp -f $centrifycc_deploy_dir/cenroll.sh /etc/centrifydc/scripts/systemd/vaultaccount.sh
     
+    chmod 744 /etc/centrifydc/scripts/systemd/vaultaccount.sh
     chmod 644 /etc/centrifydc/scripts/common.sh
     chmod 744 /etc/centrifydc/scripts/systemd/adjoin.sh
     
