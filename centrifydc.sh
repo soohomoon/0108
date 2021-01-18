@@ -44,7 +44,7 @@
 # After I upgraded the existent awscli to latest version, 
 # aws s3 cp will succeed.
 
-myhostname=t
+
 function upgrade_awscli()
 {
     if ! python --version ;then
@@ -383,7 +383,6 @@ function generate_hostname()
         echo "$host_name" >/etc/hostname 
         ;;
     esac
-    myhostname=$host_name
     #hostname $host_name
     # Fix the bug that sudo cmd always complains 'sudo: unable to resolve host' on ubuntu.
     # Actually it is AWS who shall fix the bug.
@@ -419,8 +418,12 @@ function prepare_for_adjoin()
 function do_adjoin()
 {
 
+    private_ip=`curl --fail -s http://169.254.169.254/latest/meta-data/local-ipv4`
+    host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
+        ;;
+
     #result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name `hostname` $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
-    result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name `myhostname` $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
+    result=$(/usr/sbin/adjoin $domain_name -z "$CENTRIFYDC_ZONE_NAME" --name `host_name` $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS)
     r=$?
     [ $r -ne 0 ] && echo "$CENTRIFY_MSG_PREX: adjoin failed!!" && return $r
     if echo $result | grep 'The directory service is busy' >/dev/null 2>&1 ;then
@@ -431,7 +434,7 @@ function do_adjoin()
         /usr/sbin/adjoin $domain_name \
             -z $CENTRIFYDC_ZONE_NAME \
             #--name `hostname` \
-	    --name `myhostname` \
+	    --name `host_name` \
             $CENTRIFYDC_ADJOIN_ADDITIONAL_OPTIONS
         r=$?
         [ $r -ne 0 ] && echo "$CENTRIFY_MSG_PREX: run adjoin failed again" && return 1
