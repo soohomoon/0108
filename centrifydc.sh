@@ -44,7 +44,7 @@
 # After I upgraded the existent awscli to latest version, 
 # aws s3 cp will succeed.
 
-myhostname=
+myhostname=t
 function upgrade_awscli()
 {
     if ! python --version ;then
