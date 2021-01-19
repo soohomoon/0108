@@ -116,7 +116,6 @@ host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
 
 cedit --set cli.hook.cenroll:/tmp/auto_centrify_deployment/centrifycc/vaultaccount.sh
 source /tmp/auto_centrify_deployment/centrifycc/vaultaccount.sh
-source /tmp/auto_centrify_deployment/centrifycc/vaultaccount.sh
 
 
 #do_adedit
