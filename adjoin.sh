@@ -114,6 +114,7 @@ host_name="`echo $private_ip | sed -n 's/\./-/gp'`"
 #vault
 /usr/sbin/adjoin $DOMAIN -z "$ZONE" --name "$host_name" -E /var/prestage_cache $ADDITIONAL_OPS
 
+cedit --set cli.hook.cenroll:/tmp/auto_centrify_deployment/centrifycc/vaultaccount.sh
 source /tmp/auto_centrify_deployment/centrifycc/vaultaccount.sh
 
 
